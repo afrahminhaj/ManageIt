@@ -13,7 +13,7 @@ import android.widget.TableLayout;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  implements LabsFragment.OnFragmentInteractionListener,FacultyFragment.OnFragmentInteractionListener,SeminarHallsFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +25,9 @@ public class MainActivity extends AppCompatActivity {
         TabItem tabSeminarHalls = findViewById(R.id.tabSeminarHalls);
         TabItem tabFaculty = findViewById(R.id.tabFaculty);
         final ViewPager viewPager = findViewById(R.id.viewPager);
-        PagerAdapter pagerAdapter = new
-                PagerAdapter(getSupportFragmentManager(),
-                    tabLayout.getTabCount());
-
+        final PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
-
+        viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         //changing the tab view when tab is selected or changed
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -50,7 +47,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+    }
+     @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 
